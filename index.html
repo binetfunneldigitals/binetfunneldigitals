@@ -11,9 +11,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --navy:#0000FF;--navy2:#0000FF;--navy3:#0000FF;
-  --gold:#FFF000;--gold2:#FFF000;
-  --green:#00FF80;--green2:#00FF80;
+  --navy:#0A1628;--navy2:#111f33;--navy3:#1a2d45;
+  --gold:#D4A017;--gold2:#e8bc1a;
+  --green:#1D9E75;--green2:#167a5c;
   --white:#FFFFFF;--offwhite:#F7F9FC;--offwhite2:#EEF2F7;
   --text-dark:#0A1628;--text-mid:#3a4d63;--text-muted:#6b87a3;
   --border-light:#DDE5EF;--border-dark:#1e2d45;
@@ -46,7 +46,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.9
 .hero{min-height:100vh;display:flex;align-items:center;padding:80px 5% 60px;background:var(--navy);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,160,23,0.07) 0%,transparent 70%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:350px;height:350px;background:radial-gradient(circle,rgba(29,158,117,0.06) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1100px;margin:0 auto;width:100%}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative}
+.hero-art{position:absolute;top:50%;right:-40px;transform:translateY(-50%);width:420px;opacity:0.9;pointer-events:none;z-index:0}
+.hero-content{position:relative;z-index:1;max-width:640px}
+@media(max-width:1100px){.hero-art{display:none}}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.3);border-radius:20px;padding:6px 14px;font-size:11px;font-weight:500;color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:22px}
 .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -170,6 +173,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.9
 
 /* ── VALUES ── */
 .values{background:var(--white);padding:72px 5%}
+.values-art{display:flex;justify-content:center;margin-bottom:32px}
+.values-art svg{width:100%;max-width:340px;height:auto}
+@media(max-width:640px){.values-art svg{max-width:240px}}
 .values .eyebrow{color:var(--green)}
 .values .section-title em{color:var(--gold)}
 .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
@@ -320,32 +326,111 @@ footer{background:var(--navy2);padding:48px 5% 28px;border-top:1px solid var(--b
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span class="hero-dot"></span>
-      Nigeria's Digital Growth Agency
-    </div>
-    <h1>Your Growth.<br><em>Our Mission.</em></h1>
-    <p class="hero-sub">We help small businesses in Nigeria become visible online, attract the right customers, and make consistent sales — through smart digital strategy and real execution.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Get a free consultation →</a>
-      <a href="#packages" class="btn-secondary">View our packages</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">3</div>
-        <div class="stat-lbl">Service tiers for every stage</div>
+    <!-- Original SVG illustration — floating devices dashboard, brand colors only -->
+    <svg class="hero-art" viewBox="0 0 420 400" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <title>Illustration of a laptop and phone displaying growth charts</title>
+      <defs>
+        <linearGradient id="scr1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a2d45"/>
+          <stop offset="100%" stop-color="#0A1628"/>
+        </linearGradient>
+        <linearGradient id="lap1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#22314a"/>
+          <stop offset="100%" stop-color="#111f33"/>
+        </linearGradient>
+      </defs>
+
+      <!-- soft glow -->
+      <circle cx="230" cy="200" r="190" fill="#D4A017" opacity="0.06"/>
+      <circle cx="150" cy="140" r="120" fill="#1D9E75" opacity="0.05"/>
+
+      <!-- dotted grid accent -->
+      <g opacity="0.35">
+        <circle cx="30" cy="330" r="2" fill="#1D9E75"/>
+        <circle cx="55" cy="350" r="2" fill="#1D9E75"/>
+        <circle cx="80" cy="330" r="2" fill="#1D9E75"/>
+        <circle cx="30" cy="360" r="2" fill="#1D9E75"/>
+        <circle cx="55" cy="380" r="2" fill="#1D9E75"/>
+      </g>
+
+      <!-- LAPTOP -->
+      <g transform="translate(70,110)">
+        <rect x="0" y="0" width="260" height="170" rx="10" fill="url(#scr1)" stroke="#2a3c56" stroke-width="1.5"/>
+        <rect x="14" y="14" width="232" height="142" rx="4" fill="#0A1628"/>
+        <!-- chart bars -->
+        <rect x="34" y="110" width="16" height="34" rx="2" fill="#1D9E75"/>
+        <rect x="58" y="94" width="16" height="50" rx="2" fill="#D4A017"/>
+        <rect x="82" y="76" width="16" height="68" rx="2" fill="#1D9E75"/>
+        <rect x="106" y="60" width="16" height="84" rx="2" fill="#D4A017"/>
+        <rect x="130" y="86" width="16" height="58" rx="2" fill="#1D9E75"/>
+        <!-- line chart -->
+        <polyline points="160,120 178,100 196,108 214,80 232,90" fill="none" stroke="#5DCAA5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="232" cy="90" r="4" fill="#D4A017"/>
+        <!-- text lines -->
+        <rect x="34" y="30" width="70" height="6" rx="3" fill="#3a4d63"/>
+        <rect x="34" y="42" width="46" height="6" rx="3" fill="#2a3c56"/>
+        <!-- percentage badge -->
+        <rect x="180" y="26" width="52" height="22" rx="6" fill="#1D9E75" opacity="0.15"/>
+        <text x="206" y="41" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5DCAA5" text-anchor="middle">+64%</text>
+        <!-- base -->
+        <rect x="-14" y="170" width="288" height="10" rx="4" fill="url(#lap1)"/>
+      </g>
+
+      <!-- PHONE -->
+      <g transform="translate(300,60)">
+        <rect x="0" y="0" width="90" height="180" rx="16" fill="url(#lap1)" stroke="#2a3c56" stroke-width="1.5"/>
+        <rect x="7" y="14" width="76" height="152" rx="6" fill="#0A1628"/>
+        <circle cx="45" cy="100" r="26" fill="none" stroke="#1D9E75" stroke-width="6" stroke-dasharray="120 163" stroke-linecap="round" transform="rotate(-90 45 100)"/>
+        <circle cx="45" cy="100" r="26" fill="none" stroke="#D4A017" stroke-width="6" stroke-dasharray="40 163" stroke-dashoffset="-120" stroke-linecap="round" transform="rotate(-90 45 100)"/>
+        <rect x="18" y="28" width="54" height="5" rx="2.5" fill="#3a4d63"/>
+        <rect x="18" y="140" width="30" height="12" rx="4" fill="#1D9E75" opacity="0.2"/>
+        <rect x="52" y="140" width="20" height="12" rx="4" fill="#2a3c56"/>
+      </g>
+
+      <!-- floating small phone bottom left -->
+      <g transform="translate(20,230) rotate(-8)">
+        <rect x="0" y="0" width="70" height="130" rx="12" fill="url(#lap1)" stroke="#2a3c56" stroke-width="1.2" opacity="0.95"/>
+        <rect x="6" y="10" width="58" height="110" rx="4" fill="#0A1628"/>
+        <rect x="14" y="20" width="42" height="4" rx="2" fill="#3a4d63"/>
+        <polyline points="14,80 24,68 34,74 44,58 54,64" fill="none" stroke="#5DCAA5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="14" y="94" width="18" height="16" rx="2" fill="#D4A017" opacity="0.7"/>
+        <rect x="36" y="94" width="18" height="16" rx="2" fill="#1D9E75" opacity="0.7"/>
+      </g>
+
+      <!-- connecting dots -->
+      <circle cx="40" cy="120" r="4" fill="#D4A017"/>
+      <circle cx="380" cy="240" r="4" fill="#1D9E75"/>
+      <circle cx="360" cy="30" r="3" fill="#D4A017"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-dot"></span>
+        Nigeria's Digital Growth Agency
       </div>
-      <div class="stat-item">
-        <div class="stat-num">6+</div>
-        <div class="stat-lbl">Digital services under one roof</div>
+      <h1>Your Growth.<br><em>Our Mission.</em></h1>
+      <p class="hero-sub">We help small businesses in Nigeria become visible online, attract the right customers, and make consistent sales — through smart digital strategy and real execution.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get a free consultation →</a>
+        <a href="#packages" class="btn-secondary">View our packages</a>
       </div>
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-lbl">Focused on Nigerian businesses</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">₦65k</div>
-        <div class="stat-lbl">Starting price per month</div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-lbl">Service tiers for every stage</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6+</div>
+          <div class="stat-lbl">Digital services under one roof</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">Focused on Nigerian businesses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">₦65k</div>
+          <div class="stat-lbl">Starting price per month</div>
+        </div>
       </div>
     </div>
   </div>
@@ -613,6 +698,60 @@ footer{background:var(--navy2);padding:48px 5% 28px;border-top:1px solid var(--b
 <!-- VALUES -->
 <section class="values">
   <div class="section-inner">
+    <div class="values-art">
+      <svg viewBox="0 0 340 220" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <title>Illustration of an open laptop displaying an upward growth chart</title>
+        <defs>
+          <linearGradient id="lidgrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0A1628"/>
+            <stop offset="100%" stop-color="#1a2d45"/>
+          </linearGradient>
+          <linearGradient id="basegrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#DDE5EF"/>
+            <stop offset="50%" stop-color="#F7F9FC"/>
+            <stop offset="100%" stop-color="#DDE5EF"/>
+          </linearGradient>
+        </defs>
+
+        <!-- soft shadow -->
+        <ellipse cx="170" cy="196" rx="120" ry="10" fill="#0A1628" opacity="0.08"/>
+
+        <!-- laptop base -->
+        <path d="M60 178 L280 178 L296 194 L44 194 Z" fill="url(#basegrad)" stroke="#DDE5EF" stroke-width="1"/>
+        <rect x="150" y="180" width="40" height="6" rx="3" fill="#D4A017"/>
+
+        <!-- laptop lid/screen -->
+        <path d="M74 40 Q74 30 84 30 L256 30 Q266 30 266 40 L266 178 L74 178 Z" fill="url(#lidgrad)"/>
+        <rect x="86" y="42" width="168" height="122" rx="3" fill="#0A1628"/>
+
+        <!-- screen content: bar chart trending up -->
+        <rect x="100" y="130" width="14" height="20" rx="2" fill="#1D9E75" opacity="0.5"/>
+        <rect x="120" y="118" width="14" height="32" rx="2" fill="#1D9E75" opacity="0.65"/>
+        <rect x="140" y="102" width="14" height="48" rx="2" fill="#1D9E75" opacity="0.8"/>
+        <rect x="160" y="84" width="14" height="66" rx="2" fill="#1D9E75"/>
+        <rect x="180" y="64" width="14" height="86" rx="2" fill="#D4A017"/>
+
+        <!-- growth arrow line -->
+        <polyline points="100,146 120,134 140,120 160,96 180,72 200,58" fill="none" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M192 56 L200 58 L198 66" fill="none" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- top text lines -->
+        <rect x="100" y="56" width="60" height="5" rx="2.5" fill="#3a4d63"/>
+        <rect x="212" y="56" width="42" height="16" rx="5" fill="#D4A017" opacity="0.15"/>
+        <text x="233" y="67" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#D4A017" text-anchor="middle">GROW</text>
+
+        <!-- floating badge -->
+        <g transform="translate(250,88)">
+          <circle cx="0" cy="0" r="22" fill="#ffffff" stroke="#DDE5EF" stroke-width="1"/>
+          <text x="0" y="4" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#1D9E75" text-anchor="middle">↑72%</text>
+        </g>
+
+        <!-- small dots accent -->
+        <circle cx="40" cy="70" r="4" fill="#D4A017" opacity="0.5"/>
+        <circle cx="300" cy="150" r="4" fill="#1D9E75" opacity="0.5"/>
+        <circle cx="30" cy="130" r="3" fill="#1D9E75" opacity="0.4"/>
+      </svg>
+    </div>
     <div class="eyebrow">What we stand for</div>
     <h2 class="section-title">Our values drive<br><em>every decision we make.</em></h2>
     <div class="values-grid">
